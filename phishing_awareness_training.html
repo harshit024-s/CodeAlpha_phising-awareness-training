@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phishing Awareness Training</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; background: #f4f7fb; color: #212121; }
+    header { background: #1e4e8c; color: #fff; padding: 30px 20px; text-align: center; }
+    main { max-width: 960px; margin: 24px auto; padding: 0 20px; }
+    section { background: #fff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.06); margin-bottom: 24px; padding: 24px; }
+    h1, h2, h3 { margin-top: 0; }
+    .example, .tip { border-left: 4px solid #1e4e8c; background: #eef4ff; padding: 16px; margin: 16px 0; }
+    .quiz { margin-top: 16px; }
+    .quiz button { background: #1e4e8c; color: #fff; border: none; border-radius: 6px; padding: 10px 16px; cursor: pointer; }
+    .quiz-result { margin-top: 10px; font-weight: bold; }
+    .correct { color: #0a7d29; }
+    .incorrect { color: #c21f2b; }
+    .inline-code { background: #eff3fb; padding: 2px 5px; border-radius: 4px; font-family: Menlo, Monaco, monospace; }
+    footer { text-align: center; color: #555; font-size: 0.9rem; margin: 24px 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Phishing Awareness Training</h1>
+    <p>Learn how to spot phishing emails, fake websites, and social engineering attacks.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>What is Phishing?</h2>
+      <p>Phishing is a cyber attack that tries to trick you into sharing sensitive information or clicking a malicious link. Attackers often use email, text messages, instant messages, or fake websites to appear legitimate.</p>
+      <p>Successful phishing attacks exploit trust, urgency, curiosity, or fear — not technical vulnerabilities.</p>
+    </section>
+
+    <section>
+      <h2>How to Recognize Phishing Emails</h2>
+      <ul>
+        <li><strong>Suspicious sender address:</strong> The display name may look real, but the email address is slightly wrong.</li>
+        <li><strong>Urgency:</strong> Messages that push you to "act now" or "verify immediately" are red flags.</li>
+        <li><strong>Unexpected attachments or links:</strong> Be cautious with <em>any</em> link or attachment you did not request.</li>
+        <li><strong>Poor grammar or spelling:</strong> Legitimate organizations rarely send poorly written messages.</li>
+        <li><strong>Requests for credentials:</strong> Reputable services will not ask you to reply with passwords or multi-factor authentication codes.</li>
+      </ul>
+      <div class="example">
+        <h3>Example: Fake account alert</h3>
+        <p>"Your account will be suspended unless you click here and update your details." The link may look like <span class="inline-code">https://paypa1.com</span> or use a misspelled domain.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>How to Spot Fake Websites</h2>
+      <ul>
+        <li><strong>URL mismatches:</strong> Check the address bar carefully for typos, extra words, or unusual domains.</li>
+        <li><strong>HTTP vs HTTPS:</strong> HTTPS alone is not enough; phishing sites can use SSL too.</li>
+        <li><strong>Unusual login prompts:</strong> If a site asks for more data than normal, stop and verify the source.</li>
+        <li><strong>Branding inconsistencies:</strong> Missing logos, awkward layout, or low-quality images are warning signs.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Social Engineering Tactics</h2>
+      <p>Attackers use human psychology to bypass security:</p>
+      <ul>
+        <li><strong>Authority:</strong> Pretending to be a boss, executive, or IT support.</li>
+        <li><strong>Urgency:</strong> Forcing fast action by threatening deadlines or consequences.</li>
+        <li><strong>Reciprocity:</strong> Offering help or a reward in exchange for information.</li>
+        <li><strong>Scarcity:</strong> Claiming your account or package will be lost unless you respond quickly.</li>
+        <li><strong>Familiarity:</strong> Using your name, company, or contacts to feel legitimate.</li>
+      </ul>
+      <div class="tip">
+        <strong>Tip:</strong> Always verify unusual requests by contacting the sender through a known, trusted channel — not by replying to the suspicious message.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Best Practices to Avoid Falling Victim</h2>
+      <ul>
+        <li>Hover over links before clicking to reveal the real destination.</li>
+        <li>Never enter credentials on a website opened from an email link unless you confirmed it is legitimate.</li>
+        <li>Use multi-factor authentication (MFA) whenever available.</li>
+        <li>Keep software and browsers up to date.</li>
+        <li>Report suspicious messages to your security team immediately.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Real-World Examples</h2>
+      <div class="example">
+        <h3>Example 1: Invoice fraud</h3>
+        <p>An attacker spoofs a supplier and sends an invoice with a new bank account. The email looks authoritative but the account details are incorrect.</p>
+      </div>
+      <div class="example">
+        <h3>Example 2: Password reset scam</h3>
+        <p>"We detected unusual activity. Reset your password now." The link directs to a clone of a login page that steals your credentials.</p>
+      </div>
+      <div class="example">
+        <h3>Example 3: CEO impersonation</h3>
+        <p>A message appears to come from leadership and asks for a rush wire transfer. The attacker relies on urgency and authority to bypass normal checks.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Interactive Quiz</h2>
+      <div class="quiz" id="quiz1">
+        <h3>Question 1</h3>
+        <p>You receive an email from your bank asking you to verify your account by clicking a link. The message says your access will be suspended in 24 hours. What should you do?</p>
+        <button onclick="answerQuiz('quiz1', 2)">A. Click the link and verify immediately</button>
+        <button onclick="answerQuiz('quiz1', 1)">B. Call your bank using the number on your statement</button>
+        <button onclick="answerQuiz('quiz1', 3)">C. Reply to ask for more details</button>
+        <p class="quiz-result" id="quiz1-result"></p>
+      </div>
+
+      <div class="quiz" id="quiz2">
+        <h3>Question 2</h3>
+        <p>The URL of a login page is <span class="inline-code">https://secure-login.example.co</span>, but you expected <span class="inline-code">example.com</span>. What does this suggest?</p>
+        <button onclick="answerQuiz('quiz2', 1)">A. The page is safe because it uses HTTPS</button>
+        <button onclick="answerQuiz('quiz2', 2)">B. The domain is suspicious and may be fake</button>
+        <button onclick="answerQuiz('quiz2', 3)">C. It is definitely your company site</button>
+        <p class="quiz-result" id="quiz2-result"></p>
+      </div>
+
+      <div class="quiz" id="quiz3">
+        <h3>Question 3</h3>
+        <p>A colleague sends a chat message with a shortened URL and says, "Check this urgent file now." What is the safest first step?</p>
+        <button onclick="answerQuiz('quiz3', 1)">A. Open the link to see the file</button>
+        <button onclick="answerQuiz('quiz3', 2)">B. Ask the colleague to confirm the link in person or via phone</button>
+        <button onclick="answerQuiz('quiz3', 3)">C. Forward the message to someone else</button>
+        <p class="quiz-result" id="quiz3-result"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Keep phishing awareness active: stay cautious, verify requests, and report suspicious emails.</p>
+  </footer>
+
+  <script>
+    const quizAnswers = {
+      quiz1: 1,
+      quiz2: 2,
+      quiz3: 2
+    };
+
+    function answerQuiz(quizId, selected) {
+      const resultEl = document.getElementById(`${quizId}-result`);
+      const correct = quizAnswers[quizId];
+      if (selected === correct) {
+        resultEl.textContent = 'Correct! Great job.';
+        resultEl.className = 'quiz-result correct';
+      } else {
+        resultEl.textContent = 'Not quite. Try again or review the warning signs above.';
+        resultEl.className = 'quiz-result incorrect';
+      }
+    }
+  </script>
+</body>
+</html>
