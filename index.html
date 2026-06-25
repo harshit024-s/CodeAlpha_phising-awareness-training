@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Phishing Awareness Training</title>
+  <meta name="description" content="Interactive phishing awareness training: spot red flags, social engineering tactics, and best practices." />
+  <link rel="preconnect" href="[fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+  <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap)" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#111833;
+      --muted:#8ea0c9;
+      --text:#e7efff;
+      --accent:#6dd3ff;
+      --accent-2:#82ffa1;
+      --warn:#ffd166;
+      --danger:#ff6b6b;
+      --ok:#2bd576;
+      --link:#8be9ff;
+      --focus: #ffb86c;
+      --border:#243158;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 80% -10%, #183163 0%, rgba(24,49,99,0) 60%),
+        radial-gradient(1000px 600px at -10% 20%, #0f2a4f 0%, rgba(15,42,79,0) 60%),
+        var(--bg);
+      line-height:1.6;
+    }
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+    header{
+      display:flex;gap:20px;align-items:center;justify-content:space-between;
+      padding:12px 0 8px;border-bottom:1px solid var(--border);
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:40px;height:40px;border-radius:10px;
+      background:linear-gradient(135deg,#67d2ff, #7cffc0);
+      box-shadow:0 0 20px rgba(109,211,255,.35), inset 0 0 20px rgba(255,255,255,.15);
+      display:grid;place-items:center;color:#081321;font-weight:800
+    }
+    nav{display:flex;flex-wrap:wrap;gap:10px}
+    nav a{
+      padding:8px 12px;border-radius:8px;color:var(--text);
+    }
+    nav a.active, nav a:hover{background:rgba(255,255,255,0.06)}
+    .hero{
+      display:grid;grid-template-columns:1.2fr .8fr;gap:24px;margin:24px 0 8px
+    }
+    .card{
+      background:rgba(10,16,40,.6);
+      border:1px solid var(--border);
+      border-radius:16px;padding:20px;
+      box-shadow:0 10px 40px rgba(4,10,30,.35), inset 0 0 0 1px rgba(255,255,255,.02);
+      backdrop-filter:saturate(130%) blur(6px);
+    }
+    h1,h2,h3{line-height:1.2;margin:0 0 10px}
+    h1{font-size:30px}
+    h2{font-size:22px;margin-top:12px}
+    .muted{color:var(--muted)}
+    .badges{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+    .badge{
+      background:#0c1533;border:1px solid var(--border);color:var(--muted);
+      padding:6px 10px;border-radius:999px;font-size:13px
+    }
+    .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+    .btn{
+      appearance:none;border:0;cursor:pointer;
+      color:#091226;font-weight:700;
+      background:linear-gradient(135deg,var(--accent),#7cffc0);
+      padding:10px 14px;border-radius:10px;box-shadow:0 6px 24px rgba(109,211,255,.35);
+    }
+    .btn.secondary{
+      background:transparent;color:var(--accent);
+      border:1px solid var(--border);box-shadow:none
+    }
+    .grid{
+      display:grid;gap:16px;margin:18px 0
+    }
+    @media(min-width:900px){
+      .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+      .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+    }
+    .list{
+      display:grid;gap:10px;margin:8px 0
+    }
+    .list li{
+      list-style:none; background:rgba(255,255,255,.03); border:1px solid var(--border);
+      padding:10px;border-radius:10px
+    }
+    .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;border:1px solid var(--border);color:var(--muted)}
+    .flag{font-weight:700}
+    .danger{color:var(--danger)} .warn{color:var(--warn)} .ok{color:var(--ok)}
+    details{border:1px solid var(--border);border-radius:12px;padding:12px;background:rgba(255,255,255,.03)}
+    summary{cursor:pointer;font-weight:600}
+    .email-sim{
+      background:#0b1433;border:1px solid var(--border);border-radius:12px;overflow:hidden
+    }
+    .email-head{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:10px 12px;border-bottom:1px solid var(--border);background:#0d173a
+    }
+    .email-meta{font-size:13px;color:var(--muted)}
+    .email-body{padding:14px}
+    .email-actions{display:flex;gap:8px;padding:10px;border-top:1px solid var(--border);background:#0d173a}
+    .email-actions .btn{padding:8px 10px;font-size:13px}
+    .hint{font-size:13px;color:var(--muted)}
+    .quiz{display:grid;gap:12px}
+    .q{
+      border:1px solid var(--border);border-radius:12px;padding:12px;background:rgba(255,255,255,.03)
+    }
+    .choices{display:grid;gap:8px;margin:8px 0}
+    .choice{
+      border:1px dashed #2a3b6f;border-radius:10px;padding:10px;background:#0c1534;cursor:pointer
+    }
+    .choice.correct{border-color:#2bd576;background:rgba(43,213,118,.08)}
+    .choice.wrong{border-color:#ff6b6b;background:rgba(255,107,107,.08)}
+    .score{
+      display:flex;align-items:center;gap:10px;font-weight:700
+    }
+    .progress{
+      width:100%;height:10px;background:#0b1230;border:1px solid var(--border);border-radius:999px;overflow:hidden
+    }
+    .bar{height:100%;width:0;background:linear-gradient(90deg,#6dd3ff,#82ffa1)}
+    .footer{
+      margin:24px 0 12px;color:var(--muted);font-size:13px;text-align:center
+    }
+    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:12px;background:#0a1330;border:1px solid var(--border);padding:2px 6px;border-radius:6px;color:#b7c6f4}
+    .notice{
+      padding:10px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,.03);color:var(--muted);font-size:14px
+    }
+    .hidden{display:none !important}
+    .cert{
+      border:2px dashed var(--accent);border-radius:16px;padding:16px;background:rgba(109,211,255,.08)
+    }
+    /* Focus states for accessibility */
+    :focus{outline:2px dashed var(--focus);outline-offset:2px}
+    /* Print */
+    @media print{
+      header, nav, .btn, .email-actions{display:none !important}
+      body{background:#fff;color:#000}
+      .card{background:#fff;border-color:#ccc;box-shadow:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">🛡️</div>
+        <div>
+          <div style="font-weight:800">Phishing Awareness Training</div>
+          <div class="muted" style="font-size:13px">Spot scams. Stay safe. Report fast.</div>
+        </div>
+      </div>
+      <nav aria-label="Sections">
+        <a href="#start" class="active">Start</a>
+        <a href="#recognize">Recognize</a>
+        <a href="#websites">Fake Websites</a>
+        <a href="#social">Social Engineering</a>
+        <a href="#best">Best Practices</a>
+        <a href="#examples">Examples</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#certificate">Certificate</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="start" class="hero">
+        <div class="card">
+          <h1>Train your instincts against phishing</h1>
+          <p class="muted">Learn to identify red flags in emails, messages, and websites. Practice with realistic simulations and quizzes. Build habits that protect you and your organization.</p>
+          <div class="badges">
+            <span class="badge">Short modules</span>
+            <span class="badge">Hands-on simulations</span>
+            <span class="badge">Role-agnostic</span>
+            <span class="badge">Mobile-friendly</span>
+          </div>
+          <div class="cta-row">
+            <button class="btn" id="btn-begin" aria-describedby="begin-hint">Begin Training</button>
+            <a class="btn secondary" href="#quiz">Jump to Quiz</a>
+          </div>
+          <div id="begin-hint" class="hint">Tip: Use the Report button in your mail client to flag suspicious messages.</div>
+        </div>
+        <div class="card">
+          <h2>Your Progress</h2>
+          <div class="progress" aria-label="Course completion">
+            <div id="progress-bar" class="bar" style="width:0%"></div>
+          </div>
+          <div class="score" style="margin-top:10px">
+            <span>Module completion:</span><span id="pct">0%</span>
+          </div>
+          <div class="list" style="margin-top:12px">
+            <div class="notice">Complete each section. Pass the quiz with 80%+ to unlock your printable certificate.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="recognize" class="card">
+        <h2>Recognize phishing emails</h2>
+        <p class="muted">Red flags to watch for in emails and messages:</p>
+        <ul class="list">
+          <li><span class="flag danger">Urgency or fear</span>: “Act now or your account will be closed.” Pressure bypasses careful thinking.</li>
+          <li><span class="flag warn">Mismatched sender</span>: Display name says “Support” but the address is odd (e.g., support@compa ny-secure.net).</li>
+          <li><span class="flag warn">Suspicious links</span>: Link text says one domain but the actual URL points elsewhere. Hover to preview.</li>
+          <li><span class="flag warn">Attachments you didn’t expect</span>: Especially .html, .exe, .zip, .iso, or “invoice” out of the blue.</li>
+          <li><span class="flag warn">Grammar and tone issues</span>: Unusual phrasing, inconsistent branding, or off greetings (“Dear user”).</li>
+          <li><span class="flag warn">Requests for credentials or MFA codes</span>: Legitimate teams won’t ask you to share passwords or codes by email/SMS.</li>
+          <li><span class="flag warn">Too good to be true</span>: Unexpected refunds, prizes, or job offers with prepayment.</li>
+        </ul>
+        <details>
+          <summary>How to safely inspect links</summary>
+          <ul class="list">
+            <li>Hover over links on desktop to see the true destination in your status bar or tooltip.</li>
+            <li>On mobile, long-press to preview the URL. Check domain spelling and top-level domain (e.g., .com vs .co).</li>
+            <li>Type the known site address yourself in a new tab instead of clicking.</li>
+            <li>Use your company’s browser isolation or sandbox if available for suspicious links.</li>
+          </ul>
+        </details>
+      </section>
+
+      <section id="websites" class="card">
+        <h2>Spotting fake websites</h2>
+        <div class="grid cols-2">
+          <div>
+            <h3>Check the domain</h3>
+            <ul class="list">
+              <li><b>Look for typosquatting</b>: paypaI.com (capital i) vs paypal.com.</li>
+              <li><b>Beware of subdomain tricks</b>: login.paypal.com.attacker.site is not PayPal.</li>
+              <li><b>Use official apps or bookmarks</b> for sensitive logins.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Page signals</h3>
+            <ul class="list">
+              <li><b>HTTPS padlock is necessary but not sufficient</b> — attackers can get certificates too.</li>
+              <li><b>Design inconsistencies</b>: off logos, colors, broken UI, odd language.</li>
+              <li><b>Form requests</b> for recovery codes, MFA seeds, or full SSN are red flags.</li>
+            </ul>
+          </div>
+        </div>
+        <details>
+          <summary>Advanced: Validate with WHOIS and reputation checks</summary>
+          <ul class="list">
+            <li>Newly created domains are riskier; many scams spin up within days.</li>
+            <li>Use reputation tools provided by your security team before entering data.</li>
+          </ul>
+        </details>
+      </section>
+
+      <section id="social" class="card">
+        <h2>Social engineering tactics</h2>
+        <p class="muted">Attackers manipulate trust, time, and curiosity. Common plays:</p>
+        <div class="grid cols-3">
+          <div class="list">
+            <li><b>Authority</b>: “I’m the CFO; wire funds now.” May include spoofed numbers or deepfake voice.</li>
+            <li><b>Urgency/Scarcity</b>: “Offer expires in 30 minutes.”</li>
+            <li><b>Reciprocity</b>: “I sent the doc; can you review and log in?”</li>
+          </div>
+          <div class="list">
+            <li><b>Pretexting</b>: Fake IT support ticket or HR notice to harvest credentials.</li>
+            <li><b>Tailoring</b>: Spear phishing with details from LinkedIn or social media.</li>
+            <li><b>Multichannel</b>: Email + SMS (smishing) + call (vishing) to reinforce legitimacy.</li>
+          </div>
+          <div class="list">
+            <li><b>Deepfakes</b>: Synthetic voice/video mimicking leaders to approve payments.</li>
+            <li><b>Collaboration app lures</b>: Fake Teams/Slack/DocuSign/Drive notifications.</li>
+            <li><b>QR phishing</b> (“quishing”): Stickers or images redirecting to credential traps.</li>
+          </div>
+        </div>
+        <div class="notice">Verification beats speed: independently confirm unusual requests via a known-good channel (e.g., call the person using a saved number).</div>
+      </section>
+
+      <section id="best" class="card">
+        <h2>Best practices to avoid falling victim</h2>
+        <ul class="list">
+          <li><b>Pause and verify</b>: For any sensitive request, confirm through a separate channel.</li>
+          <li><b>Use the Report button</b> in Outlook/Gmail or your company portal to alert security.</li>
+          <li><b>Hover and inspect</b> links; never enter credentials after clicking unexpected links.</li>
+          <li><b>Keep MFA on</b> and beware of fatigue attacks (multiple prompts). Deny unexpected prompts.</li>
+          <li><b>Update software</b> and browsers to reduce exploit risk.</li>
+          <li><b>Unique, strong passwords + password manager</b>. Enable passkeys when available.</li>
+          <li><b>When in doubt, don’t click</b>. Ask security — false alarms are better than incidents.</li>
+        </ul>
+      </section>
+
+      <section id="examples" class="card">
+        <h2>Real-world style examples (safe simulations)</h2>
+        <div class="grid cols-2">
+          <div class="email-sim" aria-label="Simulated email example 1">
+            <div class="email-head">
+              <div>
+                <div><b>Document Signing Service</b> <span class="pill">Display name</span></div>
+                <div class="email-meta">From: doc-signing@secure-docs-support.co</div>
+              </div>
+              <div class="pill">External</div>
+            </div>
+            <div class="email-body">
+              <p>You have 1 pending document. Action required within 1 hour to avoid access loss.</p>
+              <p><a href="#" data-realurl="[docs.example.com](https://docs.example.com/)" data-fakeurl="[secure-docs-support.co](https://secure-docs-support.co/login)">View Document</a></p>
+              <p class="hint">Hint: Hover the link. Does the domain match the real provider?</p>
+            </div>
+            <div class="email-actions">
+              <button class="btn secondary act-inspect" aria-label="Inspect link">Inspect Link</button>
+              <button class="btn secondary act-report" aria-label="Report as suspicious">Report</button>
+              <button class="btn act-click" aria-label="Click link (unsafe)">Click (unsafe)</button>
+            </div>
+          </div>
+
+          <div class="email-sim" aria-label="Simulated email example 2">
+            <div class="email-head">
+              <div>
+                <div><b>IT Support</b> <span class="pill">Spoofed</span></div>
+                <div class="email-meta">From: it.helpdesk@company-security.com</div>
+              </div>
+              <div class="pill">External</div>
+            </div>
+            <div class="email-body">
+              <p>We detected unusual sign-in activity. Download the attached HTML to verify your account.</p>
+              <ul class="hint">
+                <li>Unexpected attachment</li>
+                <li>External domain</li>
+                <li>Urgent tone</li>
+              </ul>
+            </div>
+            <div class="email-actions">
+              <button class="btn secondary act-inspect" data-type="attachment">Inspect Attachment</button>
+              <button class="btn secondary act-report">Report</button>
+              <button class="btn act-click">Open Attachment (unsafe)</button>
+            </div>
+          </div>
+        </div>
+        <div id="sim-output" class="notice" style="margin-top:12px">Interact with the examples to practice safe choices.</div>
+      </section>
+
+      <section id="quiz" class="card">
+        <h2>Knowledge check</h2>
+        <p class="muted">Score 80% or higher to pass.</p>
+        <div class="quiz" id="quiz-root"></div>
+        <div class="cta-row">
+          <button class="btn" id="submit-quiz">Submit Quiz</button>
+          <button class="btn secondary hidden" id="retry-quiz">Retry</button>
+        </div>
+        <div id="quiz-result" class="notice" style="margin-top:12px"></div>
+      </section>
+
+      <section id="certificate" class="card">
+        <h2>Certificate</h2>
+        <div id="cert-locked" class="notice">Pass the quiz to unlock your certificate.</div>
+        <div id="cert-unlocked" class="cert hidden" aria-live="polite">
+          <h3>Certificate of Completion</h3>
+          <p>This certifies that <b><span id="cert-name">Learner</span></b> successfully completed Phishing Awareness Training with a passing score.</p>
+          <p><span class="muted">Completion ID:</span> <span id="cert-id"></span></p>
+          <div class="cta-row">
+            <button class="btn" onclick="window.print()">Print / Save as PDF</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">
+        Training content summarizes widely recommended phishing awareness practices. Always follow your organization’s specific policies and reporting procedures.
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Simple SPA: nav highlight on scroll
+    const sections = Array.from(document.querySelectorAll('main section'));
+    const navLinks = Array.from(document.querySelectorAll('nav a'));
+    function setActive(hash){
+      navLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===hash));
+    }
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          setActive('#'+e.target.id);
+          markComplete(e.target.id);
+        }
+      });
+    }, {threshold:.5});
+    sections.forEach(s=>io.observe(s));
+
+    // Progress tracking
+    const STORAGE_KEY = 'phishing_training_v1';
+    const state = JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
+    const allIds = sections.map(s=>s.id);
+    if(!state.completed){ state.completed = {}; }
+    function markComplete(id){
+      if(!allIds.includes(id)) return;
+      state.completed[id]=true;
+      saveState();
+      renderProgress();
+    }
+    function saveState(){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+    function percentComplete(){
+      const done = Object.keys(state.completed||{}).filter(k=>state.completed[k]).length;
+      return Math.round((done / allIds.length) * 100);
+    }
+    function renderProgress(){
+      const pct = Math.min(100, percentComplete());
+      document.getElementById('pct').textContent = pct+'%';
+      document.getElementById('progress-bar').style.width = pct+'%';
+      const certLocked = document.getElementById('cert-locked');
+      const certUnlocked = document.getElementById('cert-unlocked');
+      if(state.passed){
+        certLocked.classList.add('hidden');
+        certUnlocked.classList.remove('hidden');
+      }
+    }
+
+    // Begin button scroll
+    document.getElementById('btn-begin').addEventListener('click', ()=> {
+      document.getElementById('recognize').scrollIntoView({behavior:'smooth', block:'start'});
+    });
+
+    // Simulated emails interactions
+    const simOutput = document.getElementById('sim-output');
+    document.querySelectorAll('.email-sim').forEach(sim=>{
+      sim.addEventListener('click', (e)=>{
+        const btn = e.target.closest('button');
+        if(!btn) return;
+        if(btn.classList.contains('act-inspect')){
+          const a = sim.querySelector('a');
+          if(btn.dataset.type==='attachment'){
+            simOutput.textContent = 'Attachment type: HTML. Unexpected HTML attachments often contain credential-stealing pages. Do not open; report it.';
+          }else if(a){
+            const real = a.getAttribute('data-realurl');
+            const fake = a.getAttribute('data-fakeurl');
+            simOutput.textContent = `Displayed as "View Document", but hover reveals ${fake}. This does not match the real provider domain. Report and navigate to the service via your bookmark instead.`;
+          }
+        }
+        if(btn.classList.contains('act-report')){
+          simOutput.textContent = 'Good choice. Use your mail client\'s Report button so security can analyze and block similar threats.';
+          toast('Reported. Nice work!','ok');
+          addSafePoint();
+        }
+        if(btn.classList.contains('act-click')){
+          simOutput.textContent = 'Unsafe action detected. In real life this could expose credentials or install malware. Always verify first.';
+          toast('Unsafe: avoid clicking suspicious links or attachments.','danger');
+          addRiskPoint();
+        }
+      });
+    });
+
+    // Quiz content
+    const QUESTIONS = [
+      {
+        q: 'An email says “Your account will be closed in 1 hour. Click to verify.” The sender is external. What’s the safest first step?',
+        choices: [
+          'Click immediately to avoid loss.',
+          'Report the email and verify via a known-good channel.',
+          'Reply asking for more info.',
+          'Forward to colleagues to ask if it’s legit.'
+        ],
+        correct: 1,
+        why: 'Urgency is a red flag. Report it, then independently verify using a trusted method (e.g., log in via your bookmark or call using a saved number).'
+      },
+      {
+        q: 'Which domain is most likely malicious?',
+        choices: [
+          'login.microsoft.com',
+          'microsoft.com.login.verify.net',
+          'support.microsoft.com',
+          'portal.microsoft.com'
+        ],
+        correct: 1,
+        why: 'Attackers often hide the real domain at the end. The effective domain is verify.net, not microsoft.com.'
+      },
+      {
+        q: 'A coworker “messages” you in Teams with a file request, then you receive an SMS with a link. What tactic is this?',
+        choices: [
+          'Multichannel social engineering',
+          'Credential stuffing',
+          'Watering hole attack',
+          'Packet sniffing'
+        ],
+        correct: 0,
+        why: 'Coordinated prompts across apps/SMS increase perceived legitimacy.'
+      },
+      {
+        q: 'MFA prompts keep appearing on your phone unexpectedly. Best response?',
+        choices: [
+          'Accept one to stop the notifications.',
+          'Disable MFA temporarily.',
+          'Deny all prompts and report to security.',
+          'Ignore them and do nothing.'
+        ],
+        correct: 2,
+        why: 'This is likely an MFA fatigue attack. Deny and report immediately.'
+      },
+      {
+        q: 'You hover a link labeled “Bank Login” and see [bank-secure-login.com](https://bank-secure-login.com) What now?',
+        choices: [
+          'Click; it says secure.',
+          'Type your bank’s URL manually or use your bookmark.',
+          'Copy the link to a new tab to check.',
+          'Forward to a friend to test.'
+        ],
+        correct: 1,
+        why: 'Type the known website yourself; never trust unverified links for logins.'
+      },
+      {
+        q: 'Which attachment is riskiest in an unexpected email?',
+        choices: [
+          'docx',
+          'pdf',
+          'html',
+          'png'
+        ],
+        correct: 2,
+        why: 'HTML attachments can embed credential capture pages and scripts.'
+      },
+      {
+        q: 'You receive a voice call from “the CEO” asking for a wire transfer. What’s the right move?',
+        choices: [
+          'Comply immediately to be helpful.',
+          'Ask for the CEO’s middle name.',
+          'Hang up and verify via a known internal channel.',
+          'Text the number to confirm.'
+        ],
+        correct: 2,
+        why: 'Authority/deepfake risk: independently verify through official channels before any action.'
+      },
+      {
+        q: 'Which statement is best practice?',
+        choices: [
+          'HTTPS padlock guarantees a site is safe.',
+          'Use unique passwords and a manager; enable passkeys.',
+          'Share MFA codes with IT if asked.',
+          'Click unsubscribe on any suspicious email.'
+        ],
+        correct: 1,
+        why: 'HTTPS is necessary but not sufficient. Never share codes. Unsubscribe links can be bait.'
+      },
+      {
+        q: 'You’re asked to approve a DocuSign via a link from an unfamiliar domain. Safest action?',
+        choices: [
+          'Open the link on mobile data.',
+          'Report and access DocuSign from your saved bookmark/app.',
+          'Forward to your personal email to test.',
+          'Disable antivirus first.'
+        ],
+        correct: 1,
+        why: 'Use the official app/bookmark; report the suspicious email.'
+      },
+      {
+        q: 'What should you do if you clicked a suspicious link?',
+        choices: [
+          'Clear browser history and carry on.',
+          'Enter fake credentials to confuse attackers.',
+          'Disconnect, change passwords, and report immediately.',
+          'Wait to see if anything breaks.'
+        ],
+        correct: 2,
+        why: 'Act fast: disconnect, rotate credentials, and alert security to limit damage.'
+      }
+    ];
+
+    const quizRoot = document.getElementById('quiz-root');
+    const submitBtn = document.getElementById('submit-quiz');
+    const retryBtn = document.getElementById('retry-quiz');
+    const resultEl = document.getElementById('quiz-result');
+
+    function renderQuiz() {
+      quizRoot.innerHTML = '';
+      QUESTIONS.forEach((item, idx)=>{
+        const div = document.createElement('div');
+        div.className='q';
+        div.innerHTML = `
+          <div><b>Q${idx+1}.</b> ${item.q}</div>
+          <div class="choices" role="group" aria-label="Question ${idx+1}">
+            ${item.choices.map((c,i)=>`
+              <label class="choice" data-q="${idx}" data-i="${i}" tabindex="0">
+                <input type="radio" name="q${idx}" value="${i}" style="display:none" />
+                ${String.fromCharCode(65+i)}. ${c}
+              </label>
+            `).join('')}
+          </div>
+        `;
+        quizRoot.appendChild(div);
+      });
+    }
+    renderQuiz();
+
+    // Choice interactions with keyboard support
+    quizRoot.addEventListener('click', onChoice);
+    quizRoot.addEventListener('keydown', (e)=>{
+      if(e.key==='Enter' || e.key===' '){
+        const el = e.target.closest('.choice');
+        if(el){ e.preventDefault(); onChoice({target:el}); }
+      }
+    });
+    function onChoice(e){
+      const el = e.target.closest('.choice');
+      if(!el) return;
+      const qIndex = Number(el.dataset.q);
+      const group = el.parentElement.querySelectorAll('.choice');
+      group.forEach(c=>c.classList.remove('selected'));
+      el.classList.add('selected');
+      const input = el.querySelector('input');
+      if(input){ input.checked = true; }
+    }
+
+    function gradeQuiz(){
+      let score=0;
+      // reset visuals
+      document.querySelectorAll('.choice').forEach(c=>{
+        c.classList.remove('correct','wrong');
+      });
+
+      QUESTIONS.forEach((item, idx)=>{
+        const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+        const selectedIndex = selected ? Number(selected.value) : -1;
+        const choices = document.querySelectorAll(`[data-q="${idx}"]`);
+        choices.forEach((c,i)=>{
+          if(i===item.correct){
+            c.classList.add('correct');
+          }
+          if(selectedIndex===i && selectedIndex!==item.correct){
+            c.classList.add('wrong');
+          }
+        });
+        if(selectedIndex===item.correct){ score++; }
+      });
+      const pct = Math.round((score/QUESTIONS.length)*100);
+      let text = `Score: ${score}/${QUESTIONS.length} (${pct}%). `;
+      const explanations = QUESTIONS.map((q,i)=>`Q${i+1}: ${q.why}`).join(' ');
+      if(pct>=80){
+        text += 'Pass. Great job! Certificate unlocked.';
+        state.passed = true;
+        saveState();
+        unlockCert();
+        toast('Passed! Certificate unlocked.','ok');
+      }else{
+        text += 'Not quite there. Review the feedback and retry.';
+        toast('Keep going—you’re close. Review and retry.','warn');
+      }
+      resultEl.textContent = text + ' ' + explanations;
+      retryBtn.classList.remove('hidden');
+      renderProgress();
+    }
+
+    submitBtn.addEventListener('click', gradeQuiz);
+    retryBtn.addEventListener('click', ()=>{
+      renderQuiz();
+      resultEl.textContent='';
+      retryBtn.classList.add('hidden');
+      document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
+    });
+
+    // Certificate
+    function unlockCert(){
+      const name = prompt('Enter your name for the certificate:', state.certName || '') || 'Learner';
+      state.certName = name;
+      state.certId = state.certId || ('CERT-' + Math.random().toString(36).slice(2,8).toUpperCase());
+      saveState();
+      document.getElementById('cert-name').textContent = state.certName;
+      document.getElementById('cert-id').textContent = state.certId;
+      document.getElementById('cert-locked').classList.add('hidden');
+      document.getElementById('cert-unlocked').classList.remove('hidden');
+    }
+    // If previously passed, rehydrate
+    if(state.passed){
+      setTimeout(()=>{
+        document.getElementById('cert-name').textContent = state.certName || 'Learner';
+        document.getElementById('cert-id').textContent = state.certId || '';
+        document.getElementById('cert-locked').classList.add('hidden');
+        document.getElementById('cert-unlocked').classList.remove('hidden');
+      },0);
+    }
+
+    // Simple toast
+    function toast(msg,type='info'){
+      const t = document.createElement('div');
+      t.textContent = msg;
+      t.setAttribute('role','status');
+      t.style.position='fixed';
+      t.style.right='16px'; t.style.bottom='16px';
+      t.style.padding='10px 12px';
+      t.style.borderRadius='10px';
+      t.style.background = type==='ok' ? 'rgba(43,213,118,.9)'
+        : type==='danger' ? 'rgba(255,107,107,.9)'
+        : type==='warn' ? 'rgba(255,209,102,.9)'
+        : 'rgba(109,211,255,.9)';
+      t.style.color = '#081321';
+      t.style.fontWeight='700';
+      t.style.boxShadow='0 8px 24px rgba(0,0,0,.3)';
+      document.body.appendChild(t);
+      setTimeout(()=>{ t.style.opacity='0'; t.style.transition='opacity .4s'; }, 1800);
+      setTimeout(()=> t.remove(), 2300);
+    }
+
+    // Risk/safe interaction tally (for potential future analytics)
+    state.safe = state.safe || 0;
+    state.risk = state.risk || 0;
+    function addSafePoint(){ state.safe++; saveState(); }
+    function addRiskPoint(){ state.risk++; saveState(); }
+
+    // Improve external link navigation
+    document.querySelectorAll('nav a').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const href = a.getAttribute('href');
+        const target = document.querySelector(href);
+        if(target){
+          e.preventDefault();
+          target.scrollIntoView({behavior:'smooth', block:'start'});
+          history.replaceState(null,'',href);
+        }
+      });
+    });
+
+    // Initial progress render
+    renderProgress();
+  </script>
+</body>
+</html>
